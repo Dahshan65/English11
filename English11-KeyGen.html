@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مولّد أكواد English 11 — Dahshan Soft</title>
+<style>
+body{font-family:Tahoma,Arial,sans-serif;background:#0f172a;color:#e2e8f0;margin:0;padding:20px;display:flex;justify-content:center}
+.box{background:#1e293b;border-radius:18px;padding:22px;max-width:420px;width:100%}
+h2{margin:0 0 6px;color:#34d399}p{color:#94a3b8;font-size:14px}
+input{width:100%;box-sizing:border-box;padding:14px;font-size:22px;text-align:center;letter-spacing:3px;border-radius:12px;border:2px solid #334155;background:#0f172a;color:#fff;text-transform:uppercase;direction:ltr}
+button{width:100%;padding:13px;margin-top:12px;border:0;border-radius:12px;font-size:17px;font-weight:bold;background:#10b981;color:#fff;cursor:pointer}
+#out{margin-top:18px;text-align:center;font-size:56px;font-weight:bold;letter-spacing:8px;color:#fbbf24;direction:ltr;min-height:44px}
+.cp{background:#3b82f6}.hist{margin-top:16px;font-size:13px;color:#94a3b8;direction:ltr;text-align:left;white-space:pre-line}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>🔑 مولّد أكواد التفعيل</h2>
+<p>تطبيق English 11 — الفصل الأول. اكتب «رقم الجهاز» الذي أرسله الطالب لتحصل على كود التفعيل الخاص به. (هذه الأداة لك فقط، لا تشاركها.)</p>
+<input id="id" placeholder="XXXX-XXXX" maxlength="9">
+<button id="gen">توليد الكود</button>
+<div id="out"></div>
+<button class="cp" id="cp" style="display:none">📋 نسخ رسالة للطالب</button>
+<div class="hist" id="hist"></div>
+</div>
+<script>
+{
+const SECRET='DS-ENG11-q7Xv93LmP2#2026';
+function cyrb53(str,seed=0){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0)}
+function codeFor(id){return String(cyrb53(String(id).toUpperCase().replace(/[^A-Z0-9]/g,'')+SECRET)%90+10)}
+let last='';
+document.getElementById('gen').onclick=()=>{
+  const raw=document.getElementById('id').value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(raw.length!==8){document.getElementById('out').textContent='رقم غير صحيح';return}
+  const id=raw.slice(0,4)+'-'+raw.slice(4);last=codeFor(id);
+  document.getElementById('out').textContent=last;document.getElementById('cp').style.display='block';
+  document.getElementById('hist').textContent=id+'  →  '+last+'\n'+document.getElementById('hist').textContent;
+};
+document.getElementById('cp').onclick=()=>{const t='شكراً لاشتراكك في تطبيق English 11 🌟\nكود التفعيل الخاص بك: '+last+'\nافتح التطبيق ← تفعيل التطبيق ← اكتب الكود ← تفعيل.\nDahshan Soft';
+  try{navigator.clipboard.writeText(t)}catch(e){}};
+}
+</script>
+</body>
+</html>
