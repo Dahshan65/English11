@@ -1418,7 +1418,7 @@ function activatePage(locked){
     else{S.fails=(S.fails||0)+1;if(S.fails%3===0){S.failUntil=Date.now()+24*3600000;toast('⛔ 3 محاولات خاطئة — تم إيقاف التفعيل 24 ساعة')}else toast('❌ الكود غير صحيح، متبقٍ '+(3-S.fails%3)+' محاولة');save()}};
 }
 // ---------- BOOK (PDF reader) ----------
-const BOOK_URL='https://www.nccd.gov.jo';
+const BOOK_URL='https://nccd.gov.jo/Ar/Pages/textbooks';
 const BOOK_PAGES={1:5,2:17,3:31,4:43,5:57};
 const BOOK_JUMPS=[['الغلاف والمحتويات',1],['Unit 1',5],['Unit 2',17],['Life Skills 1',29],['Unit 3',31],['Unit 4',43],['Life Skills 2',55],['Unit 5',57],['Culture Spot',69],['Literature Spot',71],['Word List',73],['Grammar Reference',78],['Irregular Verbs',91],['Use of English',92]];
 function idb(){return new Promise((res,rej)=>{try{const r=indexedDB.open('eng11db',1);r.onupgradeneeded=()=>r.result.createObjectStore('f');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1439,8 +1439,8 @@ async function bookPage(start){
 function bookPick(start){
   app.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:52px">📘</div><h3 style="margin:6px 0">كتاب الطالب — من مصدره الرسمي</h3><p>كتاب <b>English — Grade 11, Semester 1</b> متاح مجاناً للطلبة على الموقع الرسمي <b>للمركز الوطني لتطوير المناهج والتقويم</b>.</p>
   <a class="fbtn" style="background:#1d4ed8;display:flex;justify-content:center;font-size:16px;padding:12px" href="${BOOK_URL}" target="_blank" rel="noopener">🌐 افتح الكتاب من الموقع الرسمي</a>
-  <p class="small en" style="text-align:center">www.nccd.gov.jo</p></div>
-  <div class="card"><h4 style="margin-top:0">طريقة الوصول للكتاب</h4><ol><li>اضغط الزر في الأعلى ليفتح موقع المركز الوطني لتطوير المناهج.</li><li>ادخل إلى قسم <b>الكتب المدرسية</b>.</li><li>اختر <b>الصف الحادي عشر</b> ← <b>اللغة الإنجليزية</b> ← <b>الفصل الأول (Student’s Book)</b>.</li></ol>
+  <p class="small en" style="text-align:center">nccd.gov.jo</p></div>
+  <div class="card"><h4 style="margin-top:0">طريقة الوصول للكتاب</h4><ol><li>اضغط الزر في الأعلى ليفتح موقع المركز الوطني لتطوير المناهج.</li><li>ستظهر صفحة <b>الكتب المدرسية</b> مباشرة.</li><li>اختر <b>الصف الحادي عشر</b> ← <b>اللغة الإنجليزية</b> ← <b>كتاب الطالب — الفصل الأول</b>.</li></ol>
   <p class="small">أرقام الصفحات المهمة في الكتاب: الوحدة 1 ص4 · الوحدة 2 ص16 · الوحدة 3 ص30 · الوحدة 4 ص42 · الوحدة 5 ص56 · Word List ص72 · Grammar Reference ص77</p></div>
   <details class="card"><summary><b>📂 هل لديك ملف الكتاب على جهازك؟ افتحه داخل التطبيق</b></summary><p class="small">إذا كانت لديك نسخة الكتاب من مدرستك، اخترها مرة واحدة ليفتحها التطبيق مباشرة على صفحة كل وحدة.</p><label class="btn o" style="cursor:pointer">اختر ملف الكتاب<input type="file" id="pf" accept="application/pdf,.pdf" style="display:none"></label></details>`+footer();
   $('#pf').onchange=async e=>{const f=e.target.files[0];if(!f)return;if(!/pdf$/i.test(f.name)&&f.type!=='application/pdf'){toast('اختر ملف PDF');return}
