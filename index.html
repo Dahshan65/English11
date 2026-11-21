@@ -1192,6 +1192,7 @@ function home(){
   <button class="tool" data-t="irr"><span>🔤</span>الأفعال الشاذة</button>
   <button class="tool" data-t="life"><span>🎤</span>مهارات الحياة</button>
   <button class="tool" data-t="culture"><span>🎭</span>Culture & Literature</button>
+  ${window.Android?'':'<a class="tool" href="download.html" style="text-decoration:none"><span>📲</span>تحميل التطبيق</a>'}
   <button class="tool" data-t="act"><span>🔑</span>${isActive()?'حالة التفعيل':'تفعيل التطبيق'}</button>
   <button class="tool" data-t="about"><span>ℹ️</span>حول التطبيق</button></div>`+footer();
   app.innerHTML=h;
