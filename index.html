@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#1e3a8a">
 <title>English 11 — الفصل الأول</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="English 11">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="تطبيق اللغة الإنجليزية لطلبة الصف الحادي عشر — المنهاج الأردني، الفصل الأول">
 <style>
 :root{--bg:#f1f5f9;--card:#fff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;--pr:#1e3a8a;--pr2:#3b82f6;--ok:#16a34a;--no:#dc2626;--wa:#f59e0b;--soft:#eff6ff;--uc:#2563eb}
 body.dark{--bg:#0b1220;--card:#131c2e;--tx:#e2e8f0;--mu:#94a3b8;--bd:#24324a;--soft:#18243a}
@@ -1154,6 +1162,7 @@ function go(fn,...args){stack.push([fn,args]);run()}
 function run(){clearInterval(timerId);if(canSpeak)speechSynthesis.cancel();if(!S.name&&stack[stack.length-1][0]!==welcome){stack=[[welcome,[]]]}else if(S.name&&isLocked()&&![activatePage,welcome].includes(stack[stack.length-1][0])){stack=[[activatePage,[true]]]}const [fn,args]=stack[stack.length-1];fn(...args);window.scrollTo(0,0)}
 function back(){if(stack.length>1){stack.pop();run()}}
 $('#back').onclick=back;
+window.appBack=()=>{if(stack.length>1){back();return true}return false};
 window.addEventListener('popstate',()=>{back();history.pushState(null,'')});
 history.pushState(null,'');
 // ---------- progress ----------
@@ -1470,6 +1479,9 @@ function bookView(p){
 go(home);
 })();
 
+</script>
+<script>
+if('serviceWorker' in navigator && location.protocol==='https:' && !window.Android){window.addEventListener('load',()=>{try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}})}
 </script>
 </body>
 </html>

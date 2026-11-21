@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+def vc = (System.getenv("VERSION_CODE") ?: "1").toInteger()
+def ks = file("release.jks")
+
+android {
+    namespace 'com.dahshansoft.english11'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.dahshansoft.english11"
+        minSdk 21
+        targetSdk 34
+        versionCode vc
+        versionName "1.0." + vc
+    }
+
+    signingConfigs {
+        release {
+            if (ks.exists()) {
+                storeFile ks
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig ks.exists() ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+}
